@@ -17,6 +17,7 @@ function Login() {
 
   const responseGoogle = (response) => {
     const { clientId, credential, select_by } = response;
+    console.log('login', response)
     setClientId(clientId);
     setCredential(credential);
     setSelect_by(select_by);

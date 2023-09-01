@@ -3,20 +3,20 @@ import Card from './components/Card';
 const cards = [
   {
     title: 'Cadastrar Nota',
-    description: 'Cadastrar Nota',
-    imageUrl: 'URL_DA_IMAGEM_1',
+    description: 'Cadastrar Nota para tal coisa',
+    imageUrl: 1,
     route: 'invoice'
   },
   {
     title: 'Card 2',
     description: 'Descrição do Card 2',
-    imageUrl: 'URL_DA_IMAGEM_2',
+    imageUrl: 2,
     route: 'invoice'
   },
   {
     title: 'Card 3',
     description: 'Descrição do Card 3',
-    imageUrl: 'URL_DA_IMAGEM_3',
+    imageUrl: 3,
     route: 'invoice'
   },
 ];
