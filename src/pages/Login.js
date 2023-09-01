@@ -4,9 +4,9 @@ import AuthContext from '../context/auth';
 
 function Login() {
   const [clientId, setClientId] = useState();
-  const [ credential, setCredential] = useState();
-  const [ select_by, setSelect_by] = useState();
-  const { setUser, login } = useContext(AuthContext);
+  const [ , setCredential] = useState();
+  const [ , setSelect_by] = useState();
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
     const hasUser = localStorage.getItem("user");

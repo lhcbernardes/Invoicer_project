@@ -1,5 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import { State } from '../context/stateContext';
+import { createContext, useState } from 'react';
 
 const AuthContext = createContext({
   user: null,
