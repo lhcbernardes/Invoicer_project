@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { State } from '../context/stateContext';
+// import { useContext } from 'react';
+// import { State } from '../context/stateContext';
 
 export default function ClientDetails() {
-  const { clientName, clientAddress, CPF } = useContext(State);
+  // const { clientName, clientAddress, CPF } = useContext(State);
 
   return (
     <>

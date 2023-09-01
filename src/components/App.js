@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import ClientDetails from './ClientDetails';
 import Dates from './Dates';
 import Footer from './Footer';
@@ -12,23 +12,14 @@ import { State } from '../context/stateContext';
 
 function App() {
   const {
-    name,
     setName,
-    address,
-    setAddress,
-    addressLocal,
     setAddressLocal,
-    email,
     setEmail,
-    phone,
     setPhone,
     cpf,
     setCPF,
     cidade,
     setCidade,
-    bairro,
-    setBairro,
-    website,
     setWebsite,
     clientName,
     setClientName,
@@ -43,13 +34,8 @@ function App() {
     notes,
     setNotes,
     componentRef,
-    instagran,
     setInstagran,
-    CEPCliente,
-    setCEPCliente,
-    CEPLocal,
     setCEPLocal,
-    CNPJ,
     setCNPJ,
     instrumento,
     setInstrumento,
@@ -59,9 +45,7 @@ function App() {
     setCor,
     atendente,
     setAtendente,
-    local,
     setLocal,
-    introTitle,
     setIntroTitle,
   } = useContext(State);
 

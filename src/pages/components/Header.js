@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth';
-import { navbar } from '../../data/data';
-import { CreateAccount, DonateButton, LogOut } from '../../buttons';
+// import { navbar } from '../../data/data';
+import { LogOut } from '../../buttons';
 
 export default function Header() {
-  const [links] = useState(navbar);
+  // const [links] = useState(navbar);
   const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 

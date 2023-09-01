@@ -1,11 +1,11 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from '../context/auth';
 
 function Login() {
   const [clientId, setClientId] = useState();
-  const [credential, setCredential] = useState();
-  const [select_by, setSelect_by] = useState();
+  const [ credential, setCredential] = useState();
+  const [ select_by, setSelect_by] = useState();
   const { setUser, login } = useContext(AuthContext);
 
   useEffect(() => {

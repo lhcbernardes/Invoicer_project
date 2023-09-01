@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ export default function TableForm() {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const {
-    description,
+    // description,
     setDescription,
     quantity,
     setQuantity,
