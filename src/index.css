@@ -70,15 +70,6 @@ body {
   top: -150px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #112827;
-}
-
 label {
   margin-bottom: 0.3rem;
   font-size: 1.05rem;

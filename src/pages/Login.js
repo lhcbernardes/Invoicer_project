@@ -25,32 +25,15 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex w-full max-w-screen-lg">
-        <div className="flex-1 bg-white p-8">
-          <h2 className="text-2xl font-semibold mb-4">Login</h2>
-          {/* <form>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">Email</label>
-              <input type="email" id="email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-2">Senha</label>
-              <input type="password" id="password" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
-            </div>
-            <div className="text-center">
-              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Entrar</button>
-            </div>
-          </form> */}
-          {/* <div className="mt-4 text-center">
-            <button onClick={handleGoogleLogin} className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300 ease-in-out">
-              Entrar com o Google
-            </button>
-          </div> */}
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="bg-gray-800 text-white rounded-lg p-8 shadow-lg w-full md:w-3/4 lg:w-1/2 xl:w-1/3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="md:text-center flex flex-col items-center justify-center">
+          <h2 className="text-3xl font-semibold mb-4">Login</h2>
+          <p className="text-lg mb-4">Bem-vindo! Faça o login para acessar sua conta.</p>
           <GoogleLogin className="flex w-full max-w-screen-lg"
             size="large"
             theme="filled_black"
-            width="800px"
             onSuccess={(credentialResponse) => {
               responseGoogle(credentialResponse);
             }}
@@ -60,11 +43,16 @@ function Login() {
             useOneTap
           />
         </div>
-        <div className="flex-1 hidden lg:block">
-          <img src="/path/to/your/image.jpg" alt="Imagem de fundo" className="object-cover w-full h-full" />
+        <div className="md:text-center">
+          <img
+            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+            alt="Imagem Legal"
+            className="w-full max-h-full rounded-2xl"
+          />
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Invoice from './components/App';
 import AuthContext from './context/auth';
-import { Login, ScrollToTop, Header, Error } from './pages';
+import { Login, ScrollToTop, Header, Error, Home } from './pages';
 
 export default function App() {
   const { user } = useContext(AuthContext);
@@ -12,21 +12,10 @@ export default function App() {
       <ScrollToTop />
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <React.Fragment>
-              {user ? (
-                <Invoice />
-              ) : (
-                <React.Fragment>
-                  <Login />
-                </React.Fragment>
-              )}
-            </React.Fragment>
-          }
-        ></Route>
-
+        <Route exact path="/" element={user ? <Home /> : <Login/>} />
+        <Route exact path="/invoice" element={user ? <Invoice /> : <Login/>} />
+        <Route path="/login" element={Login} />
+        {/* <Navigate to="/" /> */}
         <Route path="*" element={<Error />}></Route>
       </Routes>
     </BrowserRouter>
