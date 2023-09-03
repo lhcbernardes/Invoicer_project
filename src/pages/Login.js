@@ -5,6 +5,8 @@ import jwt_decode from "jwt-decode";
 import { State } from '../context/stateContext';
 import { useNavigate } from "react-router-dom";
 
+import BackFront from "../pages/components/leafs.jpg";
+
 function Login() {
   const [clientId, ] = useState();
   const [ , setCredential] = useState();
@@ -59,8 +61,6 @@ function Login() {
     navigate("/home");
   }
 
-
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
     <div className="bg-gray-800 text-white rounded-lg p-8 shadow-lg w-full md:w-3/4 lg:w-1/2 xl:w-1/3">
@@ -82,7 +82,7 @@ function Login() {
         </div>
         <div className="md:text-center">
           <img
-            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+            src={BackFront}
             alt="Imagem Legal"
             className="w-full max-h-full rounded-2xl"
           />
