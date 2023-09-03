@@ -47,7 +47,7 @@ export default function App() {
             />
           }
         />
-        {/* <Route exact path="/" element={user ? <Home /> : <Login/>} /> */}
+        <Route exact path="/" element={user ? <Home /> : <Login/>} />
         {/* <Route exact path="/invoice" element={user ? <Invoice /> : <Login/>} /> */}
         {/* <Route path="/home" element={<Home />}></Route> */}
         {/* <Navigate to="/" /> */}
