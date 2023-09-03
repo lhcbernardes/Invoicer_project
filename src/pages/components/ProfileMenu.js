@@ -1,6 +1,6 @@
 import React, {useState, createElement, useContext } from "react";
 import { State } from '../../context/stateContext';
-
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Button,
@@ -22,6 +22,7 @@ const profileMenuItems = [
     {
       label: "Meu Perfil",
       icon: UserCircleIcon,
+      route: '/user'
     },
     {
       label: "Editar Perfil",
@@ -44,7 +45,7 @@ const profileMenuItems = [
   export default function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { name, picture } = useContext(State);
-
+    const navigate = useNavigate();
    
     const closeMenu = () => {
       setIsMenuOpen(false)
@@ -68,7 +69,7 @@ const profileMenuItems = [
             <Typography
                   as="span"
                   variant="small"
-                  className="font-normal"
+                  className="font-normal hidden lg:block"
                   color={"black"}
                 >
                   {name}
@@ -82,12 +83,12 @@ const profileMenuItems = [
           </Button>
         </MenuHandler>
         <MenuList className="p-1">
-          {profileMenuItems.map(({ label, icon }, key) => {
+          {profileMenuItems.map(({ label, icon, route }, key) => {
             const isLastItem = key === profileMenuItems.length - 1;
             return (
               <MenuItem
                 key={label}
-                
+                onClick={() => { navigate(route) }}
                 className={`flex items-center gap-2 rounded ${
                   isLastItem
                     ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"

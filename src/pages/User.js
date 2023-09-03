@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { State } from '../context/stateContext';
+
 
 const User = () => {
-  // Simulando informações do usuário
+  const { name, picture, address, email } = useContext(State);
   const user = {
-    nome: 'João da Silva',
-    email: 'joao.silva@example.com',
-    idade: 30,
-    cidade: 'São Paulo',
+    nome: name,
+    email: email,
+    cidade: address,
+    foto: picture
     // Adicione mais informações conforme necessário
   };
 
@@ -17,7 +19,7 @@ const User = () => {
         <div>
           <p className="text-lg">Nome: {user.nome}</p>
           <p className="text-lg">Email: {user.email}</p>
-          <p className="text-lg">Idade: {user.idade}</p>
+          {/* <p className="text-lg">Idade: {user.idade}</p> */}
           <p className="text-lg">Cidade: {user.cidade}</p>
           {/* Adicione mais campos aqui */}
         </div>

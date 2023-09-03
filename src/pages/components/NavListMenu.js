@@ -12,7 +12,6 @@ import {
   ChevronDownIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
-import { useNavigate  } from 'react-router-dom';
 
   const navListMenuItems = [
     {
@@ -37,15 +36,9 @@ import { useNavigate  } from 'react-router-dom';
    
   export default function NavListMenu() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navigate = useNavigate();
 
-    const redirectToRoute = (route) => {
-      console.log(route)
-      navigate(`/${route}`);
-  };
-   
     const renderItems = navListMenuItems.map(({ title, description, route }) => (
-      <div key={title} onClick={redirectToRoute(route)}>
+      <a href={`/${route}`} key={title}>
         <MenuItem>
           <Typography variant="h6" color="blue-gray" className="mb-1">
             {title}
@@ -54,7 +47,7 @@ import { useNavigate  } from 'react-router-dom';
             {description}
           </Typography>
         </MenuItem>
-      </div>
+      </a>
     ));
    
     return (

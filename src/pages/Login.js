@@ -3,20 +3,27 @@ import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from '../context/auth';
 import jwt_decode from "jwt-decode";
 import { State } from '../context/stateContext';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [clientId, ] = useState();
   const [ , setCredential] = useState();
   const { login } = useContext(AuthContext);
   const { setName, setEmail, setPicture } = useContext(State);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hasUser = localStorage.getItem("user");
     if (hasUser) {
       login(hasUser);
-      setName(localStorage.getItem("name"));
-      setEmail(localStorage.getItem("email"));
-      setPicture(localStorage.getItem("picture"));
+
+      const form2Login = {
+        name: localStorage.getItem("name"),
+        email: localStorage.getItem("email"),
+        picture: localStorage.getItem("picture")
+      }
+
+      setElements(form2Login);
     }
   }, [clientId, login]);
 
@@ -24,15 +31,32 @@ function Login() {
     const { clientId, credential } = response;
     setCredential(jwt_decode(credential));
     login(clientId);
-    console.log(jwt_decode(credential))
-    setName(jwt_decode(credential).name);
-    setEmail(jwt_decode(credential).email);
-    setPicture(jwt_decode(credential).picture);
+
+    const form2Login = {
+      name: jwt_decode(credential).name,
+      email: jwt_decode(credential).email,
+      picture: jwt_decode(credential).picture
+    }
+
+    setElements(form2Login);
+
     localStorage.setItem("user", clientId);
     localStorage.setItem("name", jwt_decode(credential).name);
     localStorage.setItem("email", jwt_decode(credential).email);
     localStorage.setItem("picture", jwt_decode(credential).picture);
   };
+
+  const navigate2Login = () => {
+    navigate("/home");
+  }
+
+  const setElements = (form) => {
+    const {name, email, picture} = form;
+    setName(name);
+    setEmail(email);
+    setPicture(picture);
+    navigate2Login();
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
