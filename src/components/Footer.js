@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { State } from '../context/stateContext';
 
 export default function Footer() {
-  const { name, email, website, phone, instagran, CEP, CNPJ } = useContext(State);
+  const { name, email, website, phone, instagran, CEPLocal, CNPJ } = useContext(State);
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function Footer() {
             <span className="font-bold">Instagran:</span> {instagran}
           </li>
           <li>
-            <span className="font-bold">CEP:</span> {CEP}
+            <span className="font-bold">CEP:</span> {CEPLocal}
           </li>
           <li>
             <span className="font-bold">CNPJ:</span> {CNPJ}

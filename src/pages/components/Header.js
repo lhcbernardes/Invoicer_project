@@ -1,62 +1,61 @@
-import React, { useState, useContext } from 'react';
-// import { Link } from 'react-router-dom';
+import React, {useState, useEffect, useContext } from "react";
+import {
+  Navbar,
+  MobileNav,
+  Typography,
+  IconButton,
+} from "@material-tailwind/react";
+import {
+  Bars2Icon,
+} from "@heroicons/react/24/outline";
+import NavList from "./NavList"
+import ProfileMenu from "./ProfileMenu"
 import AuthContext from '../../context/auth';
-// import { navbar } from '../../data/data';
-import { LogOut } from '../../buttons';
-
+ 
 export default function Header() {
-  // const [links] = useState(navbar);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const { user } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen(true);
-    const navbar = document.querySelector('.navbar');
-    const listItems = document.querySelectorAll('.list-item');
-
-    navbar.classList.toggle('open');
-    setIsOpen(!isOpen);
-
-    listItems.forEach((item) => {
-      item.addEventListener('click', () => navbar.classList.remove('open'));
-      setIsOpen(false);
-    });
-  };
-
+ 
+  const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
+ 
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setIsNavOpen(false),
+    );
+  }, []);
+ 
   return (
     <>
-      <header className="p-5 flex items-center justify-between xl:max-w-7xl lg:mx-auto 2xl:px-0">
-        <div>
-          {/* <h2 className="font-bold text-4xl text-gray-800">
-            <Link to="/">Invoicer</Link>
-          </h2> */}
+    {user ? 
+      <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6 mt-3">
+      <div className="relative mx-auto flex items-center text-blue-gray-900">
+        <Typography
+          as="a"
+          href="/home"
+          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+        >
+          Invoice Maker
+        </Typography>
+        <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">
+          <NavList />
         </div>
-
-        <nav className="navbar">
-          <ul>
-            {/* {links.map(({ id, title, url }) => (
-              <React.Fragment key={id}>
-                <li key={id} className="list-item">
-                  <Link to={url} className="text-base text-slate-700">
-                    {title}
-                  </Link>
-                </li>
-              </React.Fragment>
-            ))} */}
-
-            <li>{user ? <LogOut /> : ''}</li>
-            {/* <li>
-              <DonateButton />
-            </li> */}
-          </ul>
-        </nav>
-
-        <div className="lg:hidden">
-          <button onClick={handleClick} className="text-sm uppercase transition-all duration-500 text-slate-700">
-            {isOpen ? 'Close' : 'Menu'}
-          </button>
-        </div>
-      </header>
-    </>
+        <IconButton
+          size="sm"
+          color="blue-gray"
+          variant="text"
+          onClick={toggleIsNavOpen}
+          className="ml-auto mr-2 lg:hidden"
+        >
+          <Bars2Icon className="h-6 w-6" />
+        </IconButton>
+        <ProfileMenu />
+      </div>
+      <MobileNav open={isNavOpen} className="overflow-scroll">
+        <NavList />
+      </MobileNav>
+    </Navbar> : ''
+  }
+  </>
   );
 }

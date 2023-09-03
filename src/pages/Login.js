@@ -1,28 +1,37 @@
 import { useState, useContext, useEffect } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from '../context/auth';
+import jwt_decode from "jwt-decode";
+import { State } from '../context/stateContext';
 
 function Login() {
-  const [clientId, setClientId] = useState();
+  const [clientId, ] = useState();
   const [ , setCredential] = useState();
-  const [ , setSelect_by] = useState();
   const { login } = useContext(AuthContext);
+  const { setName, setEmail, setPicture } = useContext(State);
 
   useEffect(() => {
     const hasUser = localStorage.getItem("user");
     if (hasUser) {
       login(hasUser);
+      setName(localStorage.getItem("name"));
+      setEmail(localStorage.getItem("email"));
+      setPicture(localStorage.getItem("picture"));
     }
   }, [clientId, login]);
 
   const responseGoogle = (response) => {
-    const { clientId, credential, select_by } = response;
-    console.log('login', response)
-    setClientId(clientId);
-    setCredential(credential);
-    setSelect_by(select_by);
+    const { clientId, credential } = response;
+    setCredential(jwt_decode(credential));
     login(clientId);
+    console.log(jwt_decode(credential))
+    setName(jwt_decode(credential).name);
+    setEmail(jwt_decode(credential).email);
+    setPicture(jwt_decode(credential).picture);
     localStorage.setItem("user", clientId);
+    localStorage.setItem("name", jwt_decode(credential).name);
+    localStorage.setItem("email", jwt_decode(credential).email);
+    localStorage.setItem("picture", jwt_decode(credential).picture);
   };
 
   return (

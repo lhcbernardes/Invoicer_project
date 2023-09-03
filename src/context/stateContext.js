@@ -40,10 +40,11 @@ export default function StateContext({ children }) {
   const [cor, setCor] = useState('');
   const [CNPJ, setCNPJ] = useState('');
   const [addressLocal, setAddressLocal] = useState('');
-  // const [invoices, setInvoices] = useState([]);
+  const [picture, setPicture] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [cards, setCards] = useState([]);
 
   const componentRef = useRef();
 
@@ -218,6 +219,10 @@ export default function StateContext({ children }) {
     setIntroTitle,
     addressLocal,
     setAddressLocal,
+    picture,
+    setPicture,
+    cards,
+    setCards
   };
 
   return <State.Provider value={context}>{children}</State.Provider>;

@@ -12,9 +12,7 @@ import { State } from '../context/stateContext';
 
 function App() {
   const {
-    setName,
     setAddressLocal,
-    setEmail,
     setPhone,
     cpf,
     setCPF,
@@ -49,9 +47,9 @@ function App() {
     setIntroTitle,
   } = useContext(State);
 
-  setName('Pessoa Pessoa');
+  // setName('Pessoa Pessoa');
   setAddressLocal('Travessa Travessa');
-  setEmail('teste@teste.com');
+  // setEmail('teste@teste.com');
   setPhone('(81) 99999-9999');
   setWebsite('www.teste.com');
   setInstagran('@teste');
