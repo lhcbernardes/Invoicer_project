@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useCallback } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from '../context/auth';
 import jwt_decode from "jwt-decode";
@@ -11,6 +11,15 @@ function Login() {
   const { login } = useContext(AuthContext);
   const { setName, setEmail, setPicture } = useContext(State);
   const navigate = useNavigate();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps, no-undef
+  const setElements = useCallback((form) => {
+    const {name, email, picture} = form;
+    setName(name);
+    setEmail(email);
+    setPicture(picture);
+    navigate2Login();
+  })
 
   useEffect(() => {
     const hasUser = localStorage.getItem("user");
@@ -25,7 +34,7 @@ function Login() {
 
       setElements(form2Login);
     }
-  }, [clientId, login]);
+  }, [clientId, login, setElements]);
 
   const responseGoogle = (response) => {
     const { clientId, credential } = response;
@@ -50,13 +59,7 @@ function Login() {
     navigate("/home");
   }
 
-  const setElements = (form) => {
-    const {name, email, picture} = form;
-    setName(name);
-    setEmail(email);
-    setPicture(picture);
-    navigate2Login();
-  }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
