@@ -21,10 +21,10 @@ import {
       route: 'invoice'
     },
     {
-      title: 'Card 2',
-      description: 'Descrição do Card 2',
+      title: 'Novo cliente',
+      description: 'Cadastrar um novo cliente',
       imageUrl: 2,
-      route: 'invoice'
+      route: 'newclient'
     },
     {
       title: 'Card 3',

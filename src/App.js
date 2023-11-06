@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Invoice from './components/App';
 import AuthContext from './context/auth';
-import { Login, ScrollToTop, Header, Error, Home, User } from './pages';
+import { Login, ScrollToTop, Header, Error, Home, User, NewClient, NewSupports, NewAttendant } from './pages';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function App() {
   const { user } = useContext(AuthContext);
+  console.log(user)
   const PrivateRoute = ({ element }) => {
-  
     if (user) {
       return element;
     } else {
@@ -18,6 +20,18 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
       <Header />
       <Routes>
         <Route path="/login" element={<Login/>} />
@@ -44,6 +58,30 @@ export default function App() {
           element={
             <PrivateRoute
               element={<User/>}
+            />
+          }
+        />
+        <Route
+          path="/newclient"
+          element={
+            <PrivateRoute
+              element={<NewClient/>}
+            />
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <PrivateRoute
+              element={<NewSupports/>}
+            />
+          }
+        />
+        <Route
+          path="/attendant"
+          element={
+            <PrivateRoute
+              element={<NewAttendant/>}
             />
           }
         />

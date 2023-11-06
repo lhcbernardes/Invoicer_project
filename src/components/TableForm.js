@@ -1,28 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteModal from './DeleteModal';
 import { State } from '../context/stateContext';
-import Autosuggest from "react-autosuggest";
-
-const languages = [
-  {
-    name: "arkar",
-    year: 1972
-  },
-  {
-    name: "Elm",
-    year: 2012
-  }
-];
+// import Select from 'react-select';
 
 export default function TableForm() {
-  const [value, setValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  // const { data } = useContext(State);
   const {
-    // description,
-    setDescription,
     quantity,
     setQuantity,
     price,
@@ -33,53 +18,18 @@ export default function TableForm() {
     isEditing,
     showModal,
     setShowModal,
+    description,
+    setDescription,
     handleSubmit,
     editRow,
   } = useContext(State);
-
-  // useEffect(() => {
-  //   setDescription('');
-  // }, []);
-
-  const onChange = (event, { newValue }) => {
-    setValue(newValue);
-    setDescription(newValue);
-  };
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(() => getSuggestions(value));
-  };
-
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
-
-  const inputProps = {
-    placeholder: "Digite o serviço a ser realizado",
-    value,
-    onChange: onChange
-  };
-
-  const getSuggestions = (value) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-
-    return inputLength === 0
-      ? []
-      : languages.filter(
-          (lang) => lang.name.toLowerCase().slice(0, inputLength) === inputValue
-        );
-  };
-
-  const getSuggestionValue = (suggestion) => suggestion.name;
-
-  const renderSuggestion = (suggestion) => (
-    <div className="p-3  border border-1">{suggestion.name}</div>
-  );
+  // const servicos = data.supports || JSON.parse(localStorage.getItem("data")).supports;
+  // const optionsServicos = servicos.map((e)=> {
+  //   return {value: e._id, label: e.name}
+  // })
 
   return (
     <>
-      <ToastContainer position="top-right" theme="colored" />
-
       <form onSubmit={handleSubmit}>
         {/* <div className="flex flex-col md:mt-16">
           <label htmlFor="description">Descrição</label>
@@ -95,21 +45,17 @@ export default function TableForm() {
 
         <div className="flex flex-col md:mt-16">
           <label htmlFor="description">Descrição</label>
-          <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        theme={{
-          container: "m-2",
-          input: "p-2 w-full mb-0"
-        }}
-      />
+          <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Descrição"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
         </div>
 
-        <div className="md:grid grid-cols-3 gap-10 mx-2 my-2">
+        <div className="md:grid grid-cols-3 gap-10 my-2">
           <div className="flex flex-col">
             <label htmlFor="quantity">Quantidade</label>
             <input

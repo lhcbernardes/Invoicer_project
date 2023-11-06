@@ -2,15 +2,15 @@ import { useContext } from 'react';
 import { State } from '../context/stateContext';
 
 export default function Footer() {
-  const { name, email, website, phone, instagran, CEPLocal, CNPJ } = useContext(State);
+  const { email, website, phone, instagran, CEPLocal, CNPJ } = useContext(State);
 
   return (
     <>
       <footer className="footer border-t-2 border-gray-300 pt-5">
         <ul className="flex flex-wrap items-center justify-center">
-          <li>
+          {/* <li>
             <span className="font-bold">Cliente:</span> {name}
-          </li>
+          </li> */}
           <li>
             <span className="font-bold">Email:</span> {email}
           </li>

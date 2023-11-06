@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import ClientDetails from './ClientDetails';
 import Dates from './Dates';
 import Footer from './Footer';
@@ -9,17 +9,17 @@ import Table from './Table';
 import TableForm from './TableForm';
 import ReactToPrint from 'react-to-print';
 import { State } from '../context/stateContext';
+import Select from 'react-select';
 
 function App() {
+  const { data } = useContext(State);
   const {
-    setAddressLocal,
-    setPhone,
-    cpf,
+    clientPhone, 
+    setClientPhone,
+    CPF,
     setCPF,
-    cidade,
-    setCidade,
-    setWebsite,
-    clientName,
+    CEPCliente,
+    setCEPCliente,
     setClientName,
     clientAddress,
     setClientAddress,
@@ -30,35 +30,57 @@ function App() {
     dueDate,
     setDueDate,
     notes,
-    setNotes,
     componentRef,
-    setInstagran,
-    setCEPLocal,
-    setCNPJ,
     instrumento,
     setInstrumento,
     marca,
     setMarca,
     cor,
     setCor,
-    atendente,
-    setAtendente,
+    setNotes,
+    setName,
+    setEmail,
+    setAddressLocal,
+    setPhone,
+    setInstagran,
+    setWebsite,
+    setCEPLocal,
     setLocal,
     setIntroTitle,
+    setCNPJ,
+    // setAtendente
   } = useContext(State);
+  const atendentes = data.attendants || JSON.parse(localStorage.getItem("data")).attendants;
+  const clientes = data.clients || JSON.parse(localStorage.getItem("data")).clients;
+  const getData = data || JSON.parse(localStorage.getItem("data"));
 
-  // setName('Pessoa Pessoa');
-  setAddressLocal('Travessa Travessa');
-  // setEmail('teste@teste.com');
-  setPhone('(81) 99999-9999');
-  setWebsite('www.teste.com');
-  setInstagran('@teste');
-  setCEPLocal('54756-041');
-  setLocal('Metal Metal');
-  setIntroTitle('Segunda a Sexta: das 8h às 12h, 13:30h às 17:00h. - Sábados: das 8h às 12h');
-  // setCPF('102.321.342-27');
-  setCNPJ('5555555555');
-  setAtendente('Mulher');
+  const optionsAtendentes = atendentes.map((e)=> {
+    return {value: e.name, label: e.name}
+  })
+  const optionsClientes = clientes.map((e)=> {
+    return {value: e._id, label: e.nome}
+  })
+  const setValues = (value) => {
+    const result = clientes.find((elem)=> elem._id === value)
+    setClientAddress(result.address);
+    setCPF(result.cpf);
+    setClientName(result.nome);
+    setClientPhone(result.phone);
+    setCEPCliente(result.cep)
+  }
+
+  setName(getData.nickname);
+  setAddressLocal(getData.nickname);
+  setEmail(getData.email);
+  setPhone(getData.number);
+  setWebsite(getData.website);
+  setInstagran(getData.instagran);
+  setCEPLocal(getData.CEP);
+  setLocal(getData.nickname);
+  setIntroTitle(getData.nickname);
+  // setCPF(getData.nickname);
+  setCNPJ(getData.nickname);
+  // setAtendente(getData.nickname);
 
   return (
     <>
@@ -73,33 +95,17 @@ function App() {
           <div className="bg-white p-5 rounded shadow">
             <div className="flex flex-col justify-center">
               <article className="md:grid grid-cols-1 gap-10">
-                <div className="flex flex-col">
-                  <label htmlFor="atendente">Atendente</label>
-                  <input
-                    type="text"
-                    name="atendente"
-                    id="atendente"
-                    placeholder="Atendente"
-                    autoComplete="off"
-                    value={atendente}
-                    onChange={(e) => setAtendente(e.target.value)}
-                  />
+                <div className="flex flex-col md:mt-16">
+                  <label htmlFor="description">Atendente</label>
+                  <Select options={optionsAtendentes} />
                 </div>
               </article>
-              
 
-              <article className="md:grid grid-cols-2 gap-10 md:mt-5">
+
+              <article className="md:grid grid-cols-2 gap-10 md:my-5">
                 <div className="flex flex-col">
                   <label htmlFor="clientName">Nome do Cliente</label>
-                  <input
-                    type="text"
-                    name="clientName"
-                    id="clientName"
-                    placeholder="Digite o nome do cliente"
-                    autoComplete="off"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                  />
+                  <Select options={optionsClientes} onChange={(e) => setValues(e.value)}/>
                 </div>
 
                 <div className="flex flex-col">
@@ -111,12 +117,12 @@ function App() {
                     placeholder="Digite o endereço do cliente"
                     autoComplete="off"
                     value={clientAddress}
-                    onChange={(e) => setClientAddress(e.target.value)}
+                    disabled
                   />
                 </div>
               </article>
 
-              <article className="md:grid grid-cols-3 gap-10">
+              <article className="md:grid grid-cols-3 gap-10 md:my-5">
                 <div className="flex flex-col">
                   <label htmlFor="cpf">CPF</label>
                   <input
@@ -125,43 +131,43 @@ function App() {
                     id="cpf"
                     placeholder="Digite o CPF"
                     autoComplete="off"
-                    value={cpf}
-                    onChange={(e) => setCPF(e.target.value)}
+                    value={CPF}
+                    disabled
                   />
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="cidade">
-                    Cidade/ Estado
+                  <label htmlFor="CEPCliente">
+                    CEP
                   </label>
                   <input
                     type="text"
-                    name="cidade"
-                    id="cidade"
-                    placeholder="Digite a Cidade/Estado"
+                    name="CEPCliente"
+                    id="CEPCliente"
+                    placeholder="Digite o CEP"
                     autoComplete="off"
-                    value={cidade}
-                    onChange={(e) => setCidade(e.target.value)}
+                    value={CEPCliente}
+                    disabled
                   />
                 </div>
 
-                {/* <div className="flex flex-col">
-                  <label htmlFor="bairro">
-                    Bairro
+                <div className="flex flex-col">
+                  <label htmlFor="phone">
+                    Número Contato
                   </label>
                   <input
                     type="text"
-                    name="bairro"
-                    id="bairro"
-                    placeholder="Digite o Bairro"
+                    name="phone"
+                    id="phone"
+                    placeholder="Digite o numero"
                     autoComplete="off"
-                    value={bairro}
-                    onChange={(e) => setBairro(e.target.value)}
+                    value={clientPhone}
+                    disabled
                   />
-                </div> */}
+                </div>
               </article>
 
-              <article className="md:grid grid-cols-3 gap-10">
+              <article className="md:grid grid-cols-3 gap-10 md:my-5">
                 <div className="flex flex-col">
                   <label htmlFor="invoiceNumber">Invoice Number</label>
                   <input
@@ -202,7 +208,7 @@ function App() {
                 </div>
               </article>
 
-              <article className="md:grid grid-cols-3 gap-10">
+              <article className="md:grid grid-cols-3 gap-10 md:my-5">
                 <div className="flex flex-col">
                   <label htmlFor="Instrumento">Instrumento</label>
                   <input

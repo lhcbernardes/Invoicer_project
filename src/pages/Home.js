@@ -1,27 +1,42 @@
 import Card from './components/Card';
+import React, { useContext } from 'react';
+import { State } from '../context/stateContext';
 
-const cards = [
-  {
-    title: 'Cadastrar Nota',
-    description: 'Cadastrar Nota para tal coisa',
-    imageUrl: 1,
-    route: 'invoice'
-  },
-  {
-    title: 'Card 2',
-    description: 'Descrição do Card 2',
-    imageUrl: 2,
-    route: 'invoice'
-  },
-  {
-    title: 'Card 3',
-    description: 'Descrição do Card 3',
-    imageUrl: 3,
-    route: 'invoice'
-  },
-];
+
 
 export default function Home() {
+  const { data } = useContext(State);
+  const getData = data || JSON.parse(localStorage.getItem("data"));
+  const cards = [
+    {
+      title: 'Cadastrar Nota',
+      description: 'Cadastrar nova nota',
+      imageUrl: 1,
+      route: 'invoice'
+    },
+    {
+      title: 'Novo Cliente',
+      description: 'Cadastrar Novo Cliente',
+      total: getData.clients.length,
+      imageUrl: 2,
+      route: 'newclient'
+    },
+    {
+      title: 'Cadastrar Serviço',
+      description: 'Cadastrar possiveis serviços',
+      total: getData.supports.length,
+      imageUrl: 3,
+      route: 'services'
+    },
+    {
+      title: 'Cadastrar Atendente',
+      description: 'Cadastrar atendente',
+      total: getData.attendants.length,
+      imageUrl: 4,
+      route: 'attendant'
+    },
+  ];
+
   return (
     <>
       <section className="max-width">

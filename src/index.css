@@ -82,7 +82,6 @@ textarea {
   background-color: #fff;
   padding: 0.5rem;
   border-radius: 0.2rem;
-  margin-bottom: 2rem;
   color: #616161;
   border: 2px solid hsl(217, 91%, 60%, 30%);
   outline: none;
@@ -132,6 +131,10 @@ button {
   width: calc(100vw - 40px);
   margin: auto;
   height: 200px;
+}
+
+.article {
+  margin-bottom: 2rem;
 }
 
 .testimonials .article:first-child {

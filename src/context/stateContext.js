@@ -6,10 +6,13 @@ import collect from 'collect.js';
 export const State = createContext();
 
 export default function StateContext({ children }) {
+  const [id, setId] = useState('');
+  const [data, setData] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
   const [bankName, setBankName] = useState('');
   const [bankAccount, setBankAccount] = useState('');
   const [website, setWebsite] = useState('');
@@ -78,7 +81,6 @@ export default function StateContext({ children }) {
       setAmount('');
       setList([...list, newItems]);
       setIsEditing(false);
-      console.log(list);
     }
   };
 
@@ -147,8 +149,8 @@ export default function StateContext({ children }) {
     setAddress,
     email,
     setEmail,
-    phone,
-    setPhone,
+    clientPhone,
+    setClientPhone,
     bankName,
     setBankName,
     bankAccount,
@@ -222,7 +224,10 @@ export default function StateContext({ children }) {
     picture,
     setPicture,
     cards,
-    setCards
+    setCards,
+    id, setId,
+    data, setData,
+    phone, setPhone
   };
 
   return <State.Provider value={context}>{children}</State.Provider>;

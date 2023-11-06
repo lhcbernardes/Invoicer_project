@@ -44,7 +44,10 @@ const profileMenuItems = [
    
   export default function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { name, picture } = useContext(State);
+    const { data } = useContext(State);
+    const getData = data || JSON.parse(localStorage.getItem("data"));
+    const { picture, username } = getData;
+
     const navigate = useNavigate();
    
     const closeMenu = () => {
@@ -72,7 +75,7 @@ const profileMenuItems = [
                   className="font-normal hidden lg:block"
                   color={"black"}
                 >
-                  {name}
+                  {username}
                 </Typography>
             <ChevronDownIcon
               strokeWidth={2.5}
